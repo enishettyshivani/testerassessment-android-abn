@@ -64,7 +64,7 @@ public class abn_assessment {
             //Closing the app
             driver.closeApp();
             //making the app run in the background
-            try{driver.runAppInBackground(Duration.ofSeconds(10));}catch (Exception e) {}
+            try{driver.runAppInBackground(Duration.ofSeconds(2));}catch (Exception e) {}
             //relaunching the app
             driver.launchApp();
             //After reopening the app - checking if modules are working or not, so verifying by tapping on more options button
