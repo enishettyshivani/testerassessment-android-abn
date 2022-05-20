@@ -3,11 +3,13 @@ package apps;
 import common.Utility_Class;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.Duration;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
@@ -22,7 +24,7 @@ public class abn_assessment {
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-            capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "emulator-5554");
+            capabilities.setCapability(MobileCapabilityType.UDID, "emulator-5556");
             capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "9");
             capabilities.setCapability("appPackage", "com.abnamro.apps.referenceandroid");
             capabilities.setCapability("appActivity", "com.abnamro.apps.referenceandroid.MainActivity");
@@ -73,6 +75,23 @@ public class abn_assessment {
                 System.out.println("'Settings' text message is displayed");
             } else {
                 System.out.println("'Settings' text message is not displayed");
+            }
+            // Verifying the text by using the List method.
+            List<WebElement> text = refAndroid.text();
+            for(int x=0; x<text.size();x++)
+            {
+                if (text.get(x).getText().contains(refAndroid.title_Text().getText()))
+                {
+                    System.out.println("Title is displayed in the Screen");
+                }
+                else if (text.get(x).getText().contains(refAndroid.hello().getText()))
+                {
+                    System.out.println("Hello World is displayed in the Screen");
+                }
+                else
+                {
+                    System.out.println("Text is not displayed Correctly");
+                }
             }
         } catch (Exception e) {
             //Taking a screenshot if the app throws an error
