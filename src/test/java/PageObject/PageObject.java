@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class PageObject {
     public WebDriver driver;
     public PageObject(WebDriver driver) { PageFactory.initElements(driver, this);}
@@ -28,6 +30,11 @@ public class PageObject {
     @FindBy(xpath="//android.widget.TextView")
     WebElement title_Text;
     public WebElement title_Text() { return title_Text;}
+
+    //checking the list of text messages - android.widget.TextView class have 2 texts
+    @FindBy(xpath="//android.widget.TextView")
+    List<WebElement> text;
+    public List<WebElement> text() { return text;}
 
     //tapping on 3 dots displayed in the corner of the screen the more options button
     @FindBy(xpath="//android.widget.ImageView[contains(@content-desc,'More options')]")
