@@ -24,7 +24,7 @@ public class abn_assessment {
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-            capabilities.setCapability(MobileCapabilityType.UDID, "emulator-5556");
+            capabilities.setCapability(MobileCapabilityType.UDID, "emulator-5554");
             capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "9");
             capabilities.setCapability("appPackage", "com.abnamro.apps.referenceandroid");
             capabilities.setCapability("appActivity", "com.abnamro.apps.referenceandroid.MainActivity");
@@ -69,6 +69,7 @@ public class abn_assessment {
             driver.launchApp();
             //After reopening the app - checking if modules are working or not, so verifying by tapping on more options button
             refAndroid.more_Options().click();
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             //After tapping on more option - verifying if Settings is displayed on the label correctly or not
             refAndroid.setting().getText();
             if ("Settings".contains(setting)) {
@@ -76,17 +77,19 @@ public class abn_assessment {
             } else {
                 System.out.println("'Settings' text message is not displayed");
             }
+            refAndroid.setting().click();
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             // Verifying the text by using the List method.
             List<WebElement> text = refAndroid.text();
             for(int x=0; x<text.size();x++)
             {
-                if (text.get(x).getText().contains(refAndroid.title_Text().getText()))
-                {
-                    System.out.println("Title is displayed in the Screen");
-                }
-                else if (text.get(x).getText().contains(refAndroid.hello().getText()))
+                if (text.get(x).getText().contains(refAndroid.hello().getText()))
                 {
                     System.out.println("Hello World is displayed in the Screen");
+                }
+                else if (text.get(x).getText().contains(refAndroid.title_Text().getText()))
+                {
+                    System.out.println("Title is displayed in the Screen");
                 }
                 else
                 {
